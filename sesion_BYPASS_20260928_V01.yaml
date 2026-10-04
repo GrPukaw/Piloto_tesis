@@ -1,0 +1,27 @@
+# Configuración de la sesión — Piloto (Protocolo Experimental v2.1)
+# El video_id se forma solo: SESION_AAAAMMDD_Vnn  ->  BYPASS_20260928_V01
+
+sesion: BYPASS
+fecha: "2026-09-28"                 # fecha real de la grabación (AAAA-MM-DD, entre comillas)
+video_num: 1                        # número de video de esa fecha (V01, V02...)
+video: videos/bypass_lunes.mp4      # ruta del video, relativa a esta carpeta o absoluta
+hora_inicio: null                   # hora REAL de inicio, "HH:MM" entre comillas (ej. "07:35"). Si la sabes, ponla.
+ubicacion: "Óvalo Salida a Cusco"
+dispositivo: "Smartphone 108 MP (Bypass)"
+condiciones: ""                     # clima y luz (ej. "soleado, sin sombras fuertes")
+
+extraccion:
+  fps_dataset: 1                    # fotogramas por segundo para el dataset (Sec. 3.3)
+  calidad_jpg: 95
+
+auditoria:
+  segundos_descarte_inicial: 5      # estabilización de la cámara (Tabla 3.2)
+  factor_nitidez: 0.4               # umbral = 40 % de la mediana (valor inicial, se calibra con el piloto)
+  umbral_nitidez: null              # si lo defines, reemplaza al factor
+
+particion:
+  rol: interno                      # interno = bloques dentro del video | test_externo = sesión completa de prueba
+  seed: 42
+  bloque_min: 10                    # minutos por bloque (Sec. 3.2)
+  guarda_seg: 60                    # franja de separación entre bloques
+  prueba_frac: 0.2
