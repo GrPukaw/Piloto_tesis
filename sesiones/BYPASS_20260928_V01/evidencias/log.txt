@@ -1,0 +1,12 @@
+[2026-10-04 16:17:00] INICIO inventario | inventario sesion_BYPASS_20260928_V01.yaml
+[2026-10-04 16:17:07] FIN inventario | {"video_id": "BYPASS_20260928_V01", "duracion": "00:40:51", "resolucion": "1080x1920", "sha256": "f1906f6abf56"}
+[2026-10-04 16:17:07] TIEMPO TOTAL 6.6 s
+[2026-10-04 16:17:15] INICIO extraer | extraer sesion_BYPASS_20260928_V01.yaml
+[2026-10-04 16:20:17] FIN extraer | {"extraidos": 2452, "esperados": 2452, "fallidos": 0}
+[2026-10-04 16:20:17] TIEMPO TOTAL 182.7 s
+[2026-10-04 17:52:11] INICIO auditar | auditar sesion_BYPASS_20260928_V01.yaml
+[2026-10-04 17:52:54] FIN auditar | {"validos": 2447, "total": 2452, "umbral": 601.7}
+[2026-10-04 17:52:54] TIEMPO TOTAL 43.5 s
+[2026-10-04 17:53:27] INICIO particionar | particionar sesion_BYPASS_20260928_V01.yaml
+[2026-10-04 17:53:27] FIN particionar | {"solapamiento": 0, "fotogramas": {"train": 1107, "test": 622, "val": 541, "guarda": 177, "descartado": 5}}
+[2026-10-04 17:53:27] TIEMPO TOTAL 0.1 s

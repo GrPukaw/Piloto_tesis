@@ -1,0 +1,22 @@
+{
+  "rol": "interno",
+  "semilla": 42,
+  "bloque_min": 10,
+  "guarda_seg": 60,
+  "grupos": {
+    "BYPASS_20260928_V01_B04": "test",
+    "BYPASS_20260928_V01_B03": "val",
+    "BYPASS_20260928_V01_B02": "train",
+    "BYPASS_20260928_V01_B01": "train"
+  },
+  "fotogramas_por_particion": {
+    "train": 1107,
+    "test": 622,
+    "val": 541,
+    "guarda": 177,
+    "descartado": 5
+  },
+  "solapamiento_de_grupos": 0,
+  "separacion_minima_prueba_s": 60.0,
+  "avisos": []
+}

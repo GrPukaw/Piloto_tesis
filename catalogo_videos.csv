@@ -1,0 +1,2 @@
+﻿video_id,fecha,hora_inicio,ubicacion,dispositivo,archivo,sha256,ancho,alto,orientacion,fps,cuadros,duracion_s,duracion_hms,tamano_mb,advertencias
+BYPASS_20260928_V01,2026-09-28,08:10,Óvalo Salida a Cusco,Smartphone 108 MP (Bypass),bypass_lunes.mp4,f1906f6abf561a27d61ef475af3536bd94b36512cb526a0265867dc0531ecf93,1080,1920,vertical,29.529,72397,2451.7,00:40:51,6161.0,"Video vertical (el protocolo prevé orientación horizontal, Tabla 3.1) | Duración 00:40:51 inferior a las 2 h del protocolo (sesión exploratoria)"
