@@ -1,0 +1,13 @@
+path: .
+train: images/train
+val: images/val
+test: images/test
+names:
+  0: moto
+  1: torito
+  2: moto_carga
+  3: auto
+  4: camioneta
+  5: combi_custer
+  6: bus
+  7: camion

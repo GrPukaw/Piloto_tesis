@@ -1,12 +1,33 @@
-[2026-10-04 16:17:00] INICIO inventario | inventario sesion_BYPASS_20260928_V01.yaml
-[2026-10-04 16:17:07] FIN inventario | {"video_id": "BYPASS_20260928_V01", "duracion": "00:40:51", "resolucion": "1080x1920", "sha256": "f1906f6abf56"}
-[2026-10-04 16:17:07] TIEMPO TOTAL 6.6 s
-[2026-10-04 16:17:15] INICIO extraer | extraer sesion_BYPASS_20260928_V01.yaml
-[2026-10-04 16:20:17] FIN extraer | {"extraidos": 2452, "esperados": 2452, "fallidos": 0}
-[2026-10-04 16:20:17] TIEMPO TOTAL 182.7 s
-[2026-10-04 17:52:11] INICIO auditar | auditar sesion_BYPASS_20260928_V01.yaml
-[2026-10-04 17:52:54] FIN auditar | {"validos": 2447, "total": 2452, "umbral": 601.7}
-[2026-10-04 17:52:54] TIEMPO TOTAL 43.5 s
-[2026-10-04 17:53:27] INICIO particionar | particionar sesion_BYPASS_20260928_V01.yaml
-[2026-10-04 17:53:27] FIN particionar | {"solapamiento": 0, "fotogramas": {"train": 1107, "test": 622, "val": 541, "guarda": 177, "descartado": 5}}
-[2026-10-04 17:53:27] TIEMPO TOTAL 0.1 s
+[2026-10-05 10:48:42] INICIO todo | todo sesion_BYPASS_20260928_V01.yaml
+[2026-10-05 10:48:50] FIN inventario | {"video_id": "BYPASS_20260928_V01", "duracion": "00:40:51", "resolucion": "1080x1920", "sha256": "f1906f6abf56"}
+[2026-10-05 10:51:41] FIN extraer | {"extraidos": 2452, "esperados": 2452, "fallidos": 0}
+[2026-10-05 10:52:27] FIN auditar | {"validos": 2447, "total": 2452, "umbral": 603.6}
+[2026-10-05 10:52:27] FIN particionar | {"solapamiento": 0, "fotogramas": {"train": 1107, "test": 622, "val": 541, "guarda": 177, "descartado": 5}}
+[2026-10-05 10:52:27] TIEMPO TOTAL 224.3 s
+[2026-10-05 10:52:44] INICIO encuadre estabilidad | estabilidad sesion_BYPASS_20260928_V01.yaml
+[2026-10-05 10:54:15] FIN encuadre estabilidad | {"segmentos": 435, "estables": 15, "transicion": 420, "obstruccion": 0}
+[2026-10-05 10:54:15] TIEMPO 90.4 s
+[2026-10-05 17:23:57] INICIO encuadre estabilidad | estabilidad sesion_BYPASS_20260928_V01.yaml --rango-conteo 1830 2420
+[2026-10-05 17:24:59] FIN encuadre estabilidad | {"estados": {"REF": 2008, "ENCUADRE_DISTINTO": 419, "EVENTO": 20}, "referencia_s": 1652.0}
+[2026-10-05 17:24:59] TIEMPO 62.2 s
+[2026-10-05 17:46:36] INICIO encuadre estabilidad | estabilidad sesion_BYPASS_20260928_V01.yaml --rango-conteo 1830 2420 --ventana-s 180 --marcar
+[2026-10-05 17:47:31] FIN encuadre estabilidad | {"estados": {"REF": 2008, "ENCUADRE_DISTINTO": 419, "EVENTO": 20}, "referencia_s": 1652.0}
+[2026-10-05 17:47:31] TIEMPO 55.4 s
+[2026-10-05 17:47:41] INICIO auditar | auditar sesion_BYPASS_20260928_V01.yaml
+[2026-10-05 17:47:41] FIN auditar | {"validos": 2427, "total": 2452, "umbral": 603.6}
+[2026-10-05 17:47:41] TIEMPO TOTAL 0.5 s
+[2026-10-05 17:47:48] INICIO particionar | particionar sesion_BYPASS_20260928_V01.yaml
+[2026-10-05 17:47:48] FIN particionar | {"solapamiento": 0, "fotogramas": {"train": 1098, "test": 616, "val": 541, "guarda": 172, "descartado": 25}}
+[2026-10-05 17:47:48] TIEMPO TOTAL 0.1 s
+[2026-10-05 17:47:54] INICIO muestra | muestra sesion_BYPASS_20260928_V01.yaml --n 120
+[2026-10-05 17:47:55] FIN muestra | {"n_solicitado": 120, "n_obtenido": 120, "por_particion": {"train": 77, "test": 24, "val": 19}, "separacion_mediana_s": {"train": 14.0, "test": 26.0, "val": 28.5}, "semilla": 42, "carpeta": "C:\\Users\\Hp\\Documents\\Piloto_tesis\\sesiones\\BYPASS_20260928_V01\\etiquetado\\images"}
+[2026-10-05 17:47:55] TIEMPO 0.2 s
+[2026-10-05 17:48:03] INICIO preetiquetar | preetiquetar sesion_BYPASS_20260928_V01.yaml --imgsz 1280 --conf 0.30
+[2026-10-05 17:48:58] FIN preetiquetar | {"particiones": {"test": 548, "train": 1925, "val": 399}}
+[2026-10-05 17:48:58] TIEMPO 55.4 s
+[2026-10-05 23:08:29] INICIO dataset convertir | convertir sesion_BYPASS_20260928_V01.yaml
+[2026-10-05 23:08:33] FIN dataset convertir | {"instancias_train": 1922, "clases": 10}
+[2026-10-05 23:08:33] TIEMPO 4.1 s
+[2026-10-05 23:09:16] INICIO dataset convertir | convertir sesion_BYPASS_20260928_V01.yaml --fusionar trailer:camion tricimoto:torito
+[2026-10-05 23:09:20] FIN dataset convertir | {"instancias_train": 1922, "clases": 8}
+[2026-10-05 23:09:20] TIEMPO 4.0 s

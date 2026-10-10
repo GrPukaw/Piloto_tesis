@@ -1,0 +1,16 @@
+{
+  "n_solicitado": 120,
+  "n_obtenido": 120,
+  "por_particion": {
+    "train": 77,
+    "test": 24,
+    "val": 19
+  },
+  "separacion_mediana_s": {
+    "train": 14.0,
+    "test": 26.0,
+    "val": 28.5
+  },
+  "semilla": 42,
+  "carpeta": "C:\\Users\\Hp\\Documents\\Piloto_tesis\\sesiones\\BYPASS_20260928_V01\\etiquetado\\images"
+}

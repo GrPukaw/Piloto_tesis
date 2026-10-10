@@ -1,0 +1,26 @@
+# Mapeo de etiquetas finas (CVAT) a clases de entrenamiento — Protocolo v2.1, Tabla 3.3
+# 'null' = no se entrena; el vehículo cuenta en el total vehicular pero no en el desglose por tipo.
+clases_entrenamiento:
+  0: moto
+  1: torito
+  2: tricimoto
+  3: moto_carga
+  4: auto
+  5: camioneta
+  6: combi_custer
+  7: bus
+  8: camion
+  9: trailer
+mapeo:
+  moto: moto
+  torito: torito
+  tricimoto: tricimoto
+  moto_carga: moto_carga
+  auto: auto
+  camioneta: camioneta
+  combi: combi_custer
+  custer: combi_custer
+  bus: bus
+  camion: camion
+  trailer: trailer
+  otro: null

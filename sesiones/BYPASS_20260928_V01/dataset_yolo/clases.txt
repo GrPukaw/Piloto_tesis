@@ -1,0 +1,8 @@
+moto
+torito
+moto_carga
+auto
+camioneta
+combi_custer
+bus
+camion

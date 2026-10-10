@@ -267,7 +267,19 @@ def cmd_inventario(cfg):
 
 
 # ------------------------------------------------------------------ T01: extracción
-def cmd_extraer(cfg, sobrescribir=False):
+def sonda_pts(ruta, n=60):
+    """True si OpenCV entrega marcas de tiempo (pts) crecientes para este video."""
+    cap = cv2.VideoCapture(str(ruta))
+    ts = []
+    for _ in range(n):
+        if not cap.grab():
+            break
+        ts.append(cap.get(cv2.CAP_PROP_POS_MSEC))
+    cap.release()
+    return len(ts) >= 10 and ts[-1] > 0 and all(b > a for a, b in zip(ts, ts[1:]))
+
+
+def cmd_extraer(cfg, sobrescribir=False, tiempo="auto"):
     inv = cargar_json(cfg, "inventario.json")
     if inv is None:
         cmd_inventario(cfg)
@@ -282,6 +294,7 @@ def cmd_extraer(cfg, sobrescribir=False):
     carpeta = cfg["_frames"]
     carpeta.mkdir(parents=True, exist_ok=True)
 
+    usar_pts = sonda_pts(cfg["_video"]) if tiempo == "auto" else (tiempo == "pts")
     cap = cv2.VideoCapture(str(cfg["_video"]))
     if not cap.isOpened():
         salir(f"OpenCV no pudo abrir el video: {cfg['_video']}")
@@ -290,18 +303,32 @@ def cmd_extraer(cfg, sobrescribir=False):
 
     print("=" * 66)
     print(f"🎞️  Extrayendo a {float(cfg['extraccion']['fps_dataset']):g} FPS  |  ~{esperados} fotogramas esperados")
+    print(f"🕒 Modo de tiempo: {'marcas de tiempo reales (pts)' if usar_pts else 'índice de cuadro / FPS promedio'}")
     print(f"📂 {carpeta}")
     print("=" * 66)
 
     filas, idx, k, objetivo = [], 0, 0, 0
-    omitidos = fallidos = 0
+    omitidos = fallidos = huecos = 0
+    t_ini = None
     t0 = time.time()
     pbar = tqdm(total=esperados, unit="frame", desc="Extrayendo") if tqdm else None
 
     while True:
         if not cap.grab():
             break
-        if idx >= objetivo:
+        t_s = None
+        if usar_pts:
+            t_abs = cap.get(cv2.CAP_PROP_POS_MSEC) / 1000.0
+            t_ini = t_abs if t_ini is None else t_ini
+            t_s = t_abs - t_ini
+            k_obj = int(math.floor(t_s / intervalo + 1e-9))  # segundo real al que pertenece este cuadro
+            listo = k_obj >= k
+            if listo:
+                huecos += k_obj - k  # segundos sin ningún cuadro (hueco en el video)
+                k = k_obj
+        else:
+            listo = idx >= objetivo
+        if listo:
             ok, frame = cap.retrieve()
             if ok:
                 nombre = f"frame_{k:05d}.jpg"
@@ -315,7 +342,8 @@ def cmd_extraer(cfg, sobrescribir=False):
                 filas.append({
                     "frame_id": f"{cfg['video_id']}_F{k:05d}", "video_id": cfg["video_id"], "filename": nombre,
                     "segundo": seg, "timestamp_hms": hms(seg), "hora_reloj": hora_reloj(cfg, seg),
-                    "indice_cuadro_video": idx, "t_video_ms": round(cap.get(cv2.CAP_PROP_POS_MSEC), 1),
+                    "indice_cuadro_video": idx,
+                    "t_video_ms": round(t_s * 1000, 1) if usar_pts else round(cap.get(cv2.CAP_PROP_POS_MSEC), 1),
                     "ancho": frame.shape[1], "alto": frame.shape[0],
                     "resolucion": f"{frame.shape[1]}x{frame.shape[0]}",
                     "fuente": cfg["dispositivo"], "ubicacion": cfg["ubicacion"], "estado": "PENDIENTE",
@@ -353,7 +381,8 @@ def cmd_extraer(cfg, sobrescribir=False):
     res = {
         "sha256_video": inv["sha256"], "video": cfg["_video"].name, "fps_dataset": cfg["extraccion"]["fps_dataset"],
         "calidad_jpg": calidad, "esperados": esperados, "extraidos": len(df), "omitidos_existentes": omitidos,
-        "fallidos": fallidos, "deriva_temporal": deriva, "tiempo_s": round(seg_total, 1),
+        "fallidos": fallidos, "modo_tiempo": "pts" if usar_pts else "indice", "segundos_sin_cuadros": huecos,
+        "deriva_temporal": deriva, "tiempo_s": round(seg_total, 1),
         "carpeta": str(carpeta),
     }
     guardar_json(cfg, "extraccion.json", res)
@@ -366,10 +395,13 @@ def cmd_extraer(cfg, sobrescribir=False):
         print(f"⚠️  Fallidos: {fallidos}  ← revisar")
     if abs(len(df) - esperados) > 2:
         print("⚠️  Cantidad distinta de lo esperado: posible video con cuadros corruptos o metadatos inexactos.")
+    if huecos:
+        print(f"⚠️  {huecos} segundos del video no tienen ningún cuadro (hueco): los nombres de archivo saltan esos segundos.")
     if deriva:
-        print(f"🕒 Deriva temporal: máx {deriva['max_abs_s']} s (final {deriva['final_s']} s)")
+        print(f"🕒 Desvío entre el segundo asignado y la marca de tiempo real: máx {deriva['max_abs_s']} s (final {deriva['final_s']} s)")
         if deriva["max_abs_s"] > 1.5:
-            print("⚠️  Deriva > 1.5 s: probable video de FPS variable (VFR). Considera reconvertir con ffmpeg.")
+            print("⚠️  Desvío > 1.5 s: el video tiene FPS variable y este modo no lo corrige. "
+                  "Usa '--tiempo pts' o reconvierte con ffmpeg.")
     if borrados:
         print(f"♻️  Se reinició la sesión: se eliminaron {', '.join(borrados)}. Ejecuta 'auditar' y 'particionar' de nuevo.")
     print(f"🧾 {cfg['_sdir'] / 'dataset_metadata.csv'}")
@@ -658,6 +690,8 @@ def main():
         s.add_argument("config", help="archivo YAML de la sesión")
         if nombre in ("extraer", "todo"):
             s.add_argument("--sobrescribir", action="store_true", help="reescribe fotogramas existentes")
+            s.add_argument("--tiempo", choices=["auto", "pts", "indice"], default="auto",
+                           help="auto = marcas de tiempo reales si el video las entrega; indice = método anterior")
         if nombre in ("auditar", "todo"):
             s.add_argument("--factor", type=float, default=None, help="umbral = factor x mediana de nitidez")
             s.add_argument("--umbral", type=float, default=None, help="umbral absoluto de nitidez")
@@ -673,7 +707,7 @@ def main():
         if paso == "inventario":
             r = cmd_inventario(cfg)
         elif paso == "extraer":
-            r = cmd_extraer(cfg, getattr(a, "sobrescribir", False))
+            r = cmd_extraer(cfg, getattr(a, "sobrescribir", False), getattr(a, "tiempo", "auto"))
         elif paso == "auditar":
             r = cmd_auditar(cfg, getattr(a, "factor", None), getattr(a, "umbral", None), getattr(a, "recalcular", False))
         else:

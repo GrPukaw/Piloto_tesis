@@ -1,26 +1,27 @@
 {
   "total": 2452,
-  "validos": 2447,
-  "descartados": 5,
-  "porcentaje_validos": 99.8,
+  "validos": 2427,
+  "descartados": 25,
+  "porcentaje_validos": 98.98,
   "descartes_por_motivo": {
-    "ESTABILIZACION_INICIAL_CAMARA": 5
+    "ESTABILIZACION_INICIAL_CAMARA": 5,
+    "CAMARA_EVENTO": 20
   },
   "criterio_desenfoque": {
     "metodo": "varianza del Laplaciano",
     "ancho_analisis_px": 540,
     "factor": 0.4,
-    "umbral_usado": 601.66,
-    "mediana_sesion": 1504.16
+    "umbral_usado": 603.63,
+    "mediana_sesion": 1509.07
   },
   "nitidez_percentiles": {
-    "p1": 822.68,
-    "p5": 968.77,
-    "p25": 1330.16,
-    "p50": 1504.16,
-    "p75": 1674.35,
-    "p95": 1872.87
+    "p1": 816.59,
+    "p5": 973.92,
+    "p25": 1335.73,
+    "p50": 1509.07,
+    "p75": 1679.39,
+    "p95": 1872.09
   },
-  "revision_manual_aplicada": 0,
+  "revision_manual_aplicada": 20,
   "candidatos_luminancia_atipica": 98
 }

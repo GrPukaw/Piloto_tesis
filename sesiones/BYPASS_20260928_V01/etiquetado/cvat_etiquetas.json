@@ -1,0 +1,87 @@
+[
+  {
+    "name": "moto",
+    "color": "#d62728",
+    "type": "rectangle",
+    "attributes": []
+  },
+  {
+    "name": "torito",
+    "color": "#ff7f0e",
+    "type": "rectangle",
+    "attributes": []
+  },
+  {
+    "name": "tricimoto",
+    "color": "#bcbd22",
+    "type": "rectangle",
+    "attributes": []
+  },
+  {
+    "name": "moto_carga",
+    "color": "#8c564b",
+    "type": "rectangle",
+    "attributes": []
+  },
+  {
+    "name": "auto",
+    "color": "#1f77b4",
+    "type": "rectangle",
+    "attributes": []
+  },
+  {
+    "name": "camioneta",
+    "color": "#17becf",
+    "type": "rectangle",
+    "attributes": []
+  },
+  {
+    "name": "combi",
+    "color": "#2ca02c",
+    "type": "rectangle",
+    "attributes": []
+  },
+  {
+    "name": "custer",
+    "color": "#98df8a",
+    "type": "rectangle",
+    "attributes": []
+  },
+  {
+    "name": "bus",
+    "color": "#9467bd",
+    "type": "rectangle",
+    "attributes": []
+  },
+  {
+    "name": "camion",
+    "color": "#e377c2",
+    "type": "rectangle",
+    "attributes": []
+  },
+  {
+    "name": "trailer",
+    "color": "#7f7f7f",
+    "type": "rectangle",
+    "attributes": [
+      {
+        "name": "subtipo",
+        "mutable": false,
+        "input_type": "select",
+        "default_value": "otro",
+        "values": [
+          "ranfla",
+          "cisterna",
+          "plataforma",
+          "otro"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "otro",
+    "color": "#000000",
+    "type": "rectangle",
+    "attributes": []
+  }
+]

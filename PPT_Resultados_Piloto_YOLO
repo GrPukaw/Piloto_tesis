@@ -1,0 +1,76 @@
+---
+marp: true
+theme: default
+paginate: true
+header: 'Optimización del Detector de Vehículos - Entorno de Prueba'
+footer: 'Resultados del Modelo Base vs. Ajustado'
+---
+
+# Entorno de Entrenamiento y Validación Interna (`piloto_v1`)
+
+### Parámetros y Dinámica
+* **Parada Temprana (*Early Stopping*):** Proceso detenido en la época 47/300 (20 épocas sin mejora).[cite: 25]
+* **Mejor Modelo:** Guardado en la época 27 (`best.pt`).[cite: 25]
+* **Tiempo de Cómputo:** 0.074 horas (~4.4 min) en GPU Tesla T4.[cite: 25]
+* **Métricas Globales (399 inst.):** Precision: 0.518 | Recall: 0.688 | mAP50: 0.668[cite: 25]
+
+---
+
+### Resultados por Clase en Validación Interna
+
+| Clase | Instancias | Precision | Recall | mAP50 | Diagnóstico |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **`torito`** | 81 | 0.775 | 0.728 | **0.817** | Alta precisión inicial[cite: 25] |
+| **`camion`** | 75 | 0.823 | 0.880 | **0.871** | Excelente localización[cite: 25] |
+| **`combi_custer`** | 51 | 0.784 | 0.765 | **0.790** | Detección sólida[cite: 25] |
+| **`auto`** | 144 | 0.485 | 0.896 | **0.789** | Buen recall, precisión moderada[cite: 25] |
+| **`bus`** | 19 | 0.123 | 0.0526 | **0.132** | **Fallo crítico (Recall 5.2%)**[cite: 25] |
+
+> **Lectura:** El modelo converge rápido en la época 27[cite: 25]. Muestra alto rendimiento en clases representativas pero revela un punto ciego temprano en `bus`[cite: 25].
+
+---
+
+# Rendimiento en Test Independiente (546 Instancias)
+
+### Métricas Globales y Eficiencia Operativa
+* **Evaluación en Test:** mAP50 = 0.557 | mAP50-95 = 0.453 | Precision = 0.507 | Recall = 0.569[cite: 23]
+* **Latencia de Inferencia:** 30.1 ms/imagen (~10.6 FPS), garantizando ejecución en tiempo real[cite: 23]
+
+---
+
+### Desagregación Detallada por Categoría Vehicular
+
+| Clase | Instancias | AP50 | AP50-95 | Estado / Diagnóstico |
+| :--- | :---: | :---: | :---: | :--- |
+| **`torito`** | 120 | **0.868** | 0.726 | **Excelente:** Detección estable y precisa[cite: 23, 24] |
+| **`camion`** | 126 | **0.776** | 0.632 | **Sólido:** Alta capacidad de localización[cite: 23, 24] |
+| **`combi_custer`** | 67 | **0.762** | 0.644 | **Sólido:** Correcta identificación urbana[cite: 23, 24] |
+| **`auto`** | 164 | **0.686** | 0.596 | **Aceptable:** Confusión leve con camionetas[cite: 23, 24] |
+| **`moto_carga`** | 7 | **0.555** | 0.426 | **Moderado:** Limitado por bajo volumen ($n=7$)[cite: 23, 24] |
+| **`moto`** | 22 | **0.402** | 0.262 | **Bajo:** Dificultad por tamaño u oclusión[cite: 23, 24] |
+| **`camioneta`** | 16 | **0.296** | 0.261 | **Crítico:** Solapamiento de rasgos con `auto`[cite: 23, 24] |
+| **`bus`** | 24 | **0.108** | 0.079 | **Fallo Severo:** Infección por bajo Recall (4.1%)[cite: 23, 24] |
+
+> **Lectura:** Alta precisión en flujo local representativo[cite: 23, 24]. La caída del mAP global se debe a la omisión de `bus` y la ambigüedad `auto`/`camioneta`[cite: 23, 24].
+
+---
+
+# Impacto del Ajuste: Agrupación Macro vs. Rendimiento Categórico
+
+### Comparativa de Métricas Agregadas (`TODOS`)
+* **Precision Global:** 0.888 $\rightarrow$ 0.652 | **Recall Global:** 1.000 $\rightarrow$ 0.861[cite: 22]
+* **F1-Score Agregado:** 0.941 $\rightarrow$ 0.742 | **MAE Conteo Global:** 2.88 $\rightarrow$ 7.29 veh/imagen[cite: 22]
+
+---
+
+### Evaluación Categórica (Modelo Base vs. Ajustado)
+
+| Grupo | Instancias | F1 Base | F1 Ajustado | MAE Base | MAE Ajustado | Impacto del Ajuste |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **`tres_ruedas`** | 127 | 0.000 | **0.780** | 5.29 | **1.38** | **Ganancia Crítica:** Corrigió omisión total[cite: 22] |
+| **`pesado`** | 126 | 0.374 | **0.762** | 2.50 | **0.92** | **Mejora Sustancial:** Redujo error a <1 veh[cite: 22] |
+| **`transporte`** | 91 | 0.523 | **0.628** | 3.25 | **1.25** | **Mejora:** Optimización en conteo de combis[cite: 22] |
+| **`liviano`** | 180 | **0.685** | 0.557 | **6.79** | 7.75 | **Trade-off:** Sacrificio en clase mayoritaria[cite: 22] |
+| **`moto`** | 22 | **0.737** | 0.435 | **0.54** | 0.67 | **Degradación:** Pérdida de precisión[cite: 22] |
+
+> **Conclusión Metodológica:** Aunque el F1 macro desciende, el ajuste solucionó la incapacidad de detectar `tres_ruedas` ($F1: 0 \rightarrow 0.78$) y mejoró `pesado`[cite: 22]. Se requiere re-etiquetar `bus` y `camioneta` antes de producción[cite: 22, 23].

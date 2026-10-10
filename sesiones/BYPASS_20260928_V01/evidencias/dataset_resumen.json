@@ -1,0 +1,82 @@
+{
+  "clases_entrenamiento": [
+    "moto",
+    "torito",
+    "moto_carga",
+    "auto",
+    "camioneta",
+    "combi_custer",
+    "bus",
+    "camion"
+  ],
+  "fusiones": {
+    "trailer": "camion",
+    "tricimoto": "torito"
+  },
+  "zips_usados": {
+    "train": "cvat_export_train.zip",
+    "val": "cvat_export_val.zip",
+    "test": "cvat_export_test.zip"
+  },
+  "imagenes": {
+    "train": {
+      "imagenes": 77,
+      "sin_objetos": 0,
+      "sin_archivo_de_etiquetas": 0,
+      "esperadas_en_muestra": 77,
+      "faltantes_en_carpeta": 0
+    },
+    "val": {
+      "imagenes": 19,
+      "sin_objetos": 0,
+      "sin_archivo_de_etiquetas": 0,
+      "esperadas_en_muestra": 19,
+      "faltantes_en_carpeta": 0
+    },
+    "test": {
+      "imagenes": 24,
+      "sin_objetos": 0,
+      "sin_archivo_de_etiquetas": 0,
+      "esperadas_en_muestra": 24,
+      "faltantes_en_carpeta": 0
+    }
+  },
+  "instancias": {
+    "train": {
+      "moto": 79,
+      "torito": 355,
+      "moto_carga": 30,
+      "auto": 709,
+      "camioneta": 68,
+      "combi_custer": 201,
+      "bus": 142,
+      "camion": 338
+    },
+    "val": {
+      "moto": 14,
+      "torito": 81,
+      "moto_carga": 1,
+      "auto": 144,
+      "camioneta": 14,
+      "combi_custer": 51,
+      "bus": 19,
+      "camion": 75
+    },
+    "test": {
+      "moto": 22,
+      "torito": 120,
+      "moto_carga": 7,
+      "auto": 164,
+      "camioneta": 16,
+      "combi_custer": 67,
+      "bus": 24,
+      "camion": 126
+    }
+  },
+  "etiquetas_otro_descartadas": 0,
+  "clases_con_pocas_instancias_en_train": {},
+  "minimo_train": 30,
+  "clases_sin_ejemplos_en_val_o_test": [],
+  "solapamiento_de_grupos": 0,
+  "avisos": []
+}

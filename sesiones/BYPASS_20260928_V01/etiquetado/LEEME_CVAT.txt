@@ -1,0 +1,14 @@
+PASOS EN CVAT (app.cvat.ai)  — los nombres de menú pueden variar un poco según la versión
+1. Crea una cuenta y un PROYECTO (por ejemplo 'Piloto_tesis').
+2. En el proyecto: Constructor de etiquetas -> pestaña 'Raw' -> pega el contenido de cvat_etiquetas.json -> Done.
+   (Si el Raw no lo acepta, agrega a mano las 12 etiquetas con los mismos nombres, en el mismo orden.)
+3. Crea 3 TAREAS dentro del proyecto: 'train', 'val' y 'test'. En cada una sube las imágenes de
+   etiquetado/images/<train|val|test>. No mezcles particiones.
+4. En cada tarea: menú de la tarea (Actions) -> Upload annotations -> formato 'YOLO 1.1' ->
+   selecciona cvat_import_<partición>.zip. Las cajas aparecen ya dibujadas.
+5. Corrige a mano: cambia la etiqueta (torito, tricimoto, moto_carga, combi, custer, trailer...), ajusta cajas,
+   agrega los vehículos que falten y borra las cajas falsas. En los tráileres indica el subtipo.
+6. Al terminar cada tarea: Actions -> Export task dataset -> 'YOLO 1.1' (sin imágenes), y también
+   'CVAT for images 1.1' como respaldo (conserva el subtipo). Guarda los zips en etiquetado/exportados/<partición>/.
+7. Criterio de etiquetado: una caja por vehículo completo (el tráiler es UNA sola caja, cabina + remolque);
+   vehículos cortados por el borde se etiquetan solo si se ve más de la mitad; los detenidos también se etiquetan.

@@ -1,0 +1,66 @@
+{
+  "fecha_ejecucion": "2026-10-05T17:48:58",
+  "modelo": "yolov8s.pt",
+  "imgsz": 1280,
+  "conf": 0.3,
+  "iou_nms": 0.6,
+  "mapeo_coco_a_fina": {
+    "2": "auto",
+    "3": "moto",
+    "5": "bus",
+    "7": "camion"
+  },
+  "etiquetas_finas": [
+    "moto",
+    "torito",
+    "tricimoto",
+    "moto_carga",
+    "auto",
+    "camioneta",
+    "combi",
+    "custer",
+    "bus",
+    "camion",
+    "trailer",
+    "otro"
+  ],
+  "por_particion": {
+    "test": {
+      "imagenes": 24,
+      "preetiquetas": 548,
+      "por_clase": {
+        "auto": 309,
+        "camion": 62,
+        "bus": 149,
+        "moto": 28
+      }
+    },
+    "train": {
+      "imagenes": 77,
+      "preetiquetas": 1925,
+      "por_clase": {
+        "bus": 438,
+        "auto": 1110,
+        "camion": 282,
+        "moto": 95
+      }
+    },
+    "val": {
+      "imagenes": 19,
+      "preetiquetas": 399,
+      "por_clase": {
+        "auto": 241,
+        "bus": 100,
+        "moto": 23,
+        "camion": 35
+      }
+    }
+  },
+  "total_por_clase": {
+    "auto": 1660,
+    "camion": 379,
+    "bus": 687,
+    "moto": 146
+  },
+  "nota": "Preetiquetas provisionales con clases COCO; toritos, tricimotos, motos de carga, combis, custers y tráileres se corrigen manualmente."
+}

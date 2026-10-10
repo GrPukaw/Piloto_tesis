@@ -1,7 +1,7 @@
 {
   "pipeline": "1.0",
   "ultimo_comando": "particionar",
-  "fecha_ejecucion": "2026-10-04T17:53:27",
+  "fecha_ejecucion": "2026-10-05T17:47:48",
   "python": "3.13.0",
   "opencv": "4.13.0",
   "numpy": "2.1.3",

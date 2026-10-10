@@ -10,11 +10,11 @@
     "BYPASS_20260928_V01_B01": "train"
   },
   "fotogramas_por_particion": {
-    "train": 1107,
-    "test": 622,
+    "train": 1098,
+    "test": 616,
     "val": 541,
-    "guarda": 177,
-    "descartado": 5
+    "guarda": 172,
+    "descartado": 25
   },
   "solapamiento_de_grupos": 0,
   "separacion_minima_prueba_s": 60.0,

@@ -1,0 +1,62 @@
+{
+  "parametros": {
+    "ancho_analisis": 360,
+    "franja_superior": 0.45,
+    "similitud_min": 0.15,
+    "min_encuadre_distinto_s": 60.0,
+    "umbral_dif": 45.0,
+    "cambio_max": 0.3
+  },
+  "referencia": {
+    "filename": "frame_01652.jpg",
+    "segundo": 1652.0
+  },
+  "fotogramas_por_estado": {
+    "REF": 2008,
+    "ENCUADRE_DISTINTO": 419,
+    "EVENTO": 20
+  },
+  "intervalos_por_tipo": {
+    "EVENTO": 7,
+    "ENCUADRE_DISTINTO": 1
+  },
+  "vibracion_en_encuadre_de_referencia": {
+    "dx": {
+      "mediana_px": 17.5,
+      "p50_px": 33.2,
+      "p90_px": 79.0,
+      "p99_px": 164.9
+    },
+    "dy": {
+      "mediana_px": 2.0,
+      "p50_px": 64.9,
+      "p90_px": 177.6,
+      "p99_px": 268.1
+    }
+  },
+  "ventanas_sugeridas": [
+    {
+      "inicio_s": 1830.0,
+      "fin_s": 2010.0,
+      "inicio_hms": "00:30:30",
+      "fin_hms": "00:33:30",
+      "fotogramas_no_ref": 4
+    },
+    {
+      "inicio_s": 2040.0,
+      "fin_s": 2220.0,
+      "inicio_hms": "00:34:00",
+      "fin_hms": "00:37:00",
+      "fotogramas_no_ref": 0
+    },
+    {
+      "inicio_s": 2220.0,
+      "fin_s": 2400.0,
+      "inicio_hms": "00:37:00",
+      "fin_hms": "00:40:00",
+      "fotogramas_no_ref": 0
+    }
+  ],
+  "ventana_s": 180.0,
+  "marcados_en_revision_manual": 20
+}

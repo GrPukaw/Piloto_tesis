@@ -1,0 +1,5 @@
+﻿,moto,torito,moto_carga,auto,camioneta,combi_custer,bus,camion,total
+train,79,355,30,709,68,201,142,338,1922
+val,14,81,1,144,14,51,19,75,399
+test,22,120,7,164,16,67,24,126,546
+TOTAL,115,556,38,1017,98,319,185,539,2867

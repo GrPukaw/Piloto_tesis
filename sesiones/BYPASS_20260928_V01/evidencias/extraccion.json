@@ -7,10 +7,12 @@
   "extraidos": 2452,
   "omitidos_existentes": 0,
   "fallidos": 0,
+  "modo_tiempo": "pts",
+  "segundos_sin_cuadros": 0,
   "deriva_temporal": {
-    "max_abs_s": 20.158,
-    "final_s": -0.056
+    "max_abs_s": 0.067,
+    "final_s": 0.01
   },
-  "tiempo_s": 182.6,
+  "tiempo_s": 170.6,
   "carpeta": "C:\\Users\\Hp\\Documents\\Piloto_tesis\\sesiones\\BYPASS_20260928_V01\\frames_1fps"
 }
