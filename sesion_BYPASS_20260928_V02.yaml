@@ -2,10 +2,10 @@
 # El video_id se forma solo: SESION_AAAAMMDD_Vnn  ->  BYPASS_20260928_V01
 
 sesion: BYPASS
-fecha: "2026-09-28"                 # fecha real de la grabación (AAAA-MM-DD, entre comillas)
-video_num: 1                        # número de video de esa fecha (V01, V02...)
+fecha: "2026-10-05"                 # fecha real de la grabación (AAAA-MM-DD, entre comillas)
+video_num: 2                        # número de video de esa fecha (V01, V02...)
 video: videos/bypass_lunes.mp4      # ruta del video, relativa a esta carpeta o absoluta
-hora_inicio: 8:10                   # hora REAL de inicio, "HH:MM" entre comillas (ej. "07:35"). Si la sabes, ponla.
+hora_inicio: 8:26                   # hora REAL de inicio, "HH:MM" entre comillas (ej. "07:35"). Si la sabes, ponla.
 ubicacion: "Óvalo Salida a Cusco"
 dispositivo: "Smartphone 108 MP (Bypass)"
 condiciones: "Soleado con un poco de viento"     # clima y luz (ej. "soleado, sin sombras fuertes")
