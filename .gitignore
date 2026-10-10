@@ -11,3 +11,16 @@
 # Fotogramas extraídos: no subir masivamente
 /sesiones/BYPASS_20260928_V01/frames_1fps/
 /sesiones/BYPASS_20260928_V01_v1_respaldo/frames_1fps/
+
+# Video original
+/videos/bypass_lunes.mp4
+
+# Copia de respaldo completa
+/sesiones/BYPASS_20260928_V01_v1_respaldo/
+
+# Dataset comprimido
+/sesiones/BYPASS_20260928_V01/dataset_yolo.zip
+
+# Pesos de modelos
+/yolov8s.pt
+/modelos/best.pt
